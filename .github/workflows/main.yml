@@ -16,7 +16,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    steps:
       - name: Checkout Code
         uses: actions/checkout@v2
         with:
@@ -71,7 +70,7 @@ jobs:
           files: ${{env.ARCHIVE_NAME}}.7z
       - name: Deploy to Nexus
         uses: greatness7/nexusmods_file_updater@v1
-        if: ${{secrets.NEXUS_USERNAME}}
+        if: ${{env.MOD_NAME != null}}
         with:
           username: ${{secrets.NEXUS_USERNAME}}
           password: ${{secrets.NEXUS_PASSWORD}}
