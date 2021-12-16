@@ -73,7 +73,7 @@ jobs:
           files: ${{env.ARCHIVE_NAME}}.7z
       - name: Deploy to Nexus
         uses: greatness7/nexusmods_file_updater@v2
-        if: ${{env.MOD_NAME != null}}
+        if: ${{env.MOD_ID != null}}
         with:
           username: ${{secrets.NEXUS_USERNAME}}
           password: ${{secrets.NEXUS_PASSWORD}}
