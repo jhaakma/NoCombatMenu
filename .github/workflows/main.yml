@@ -47,8 +47,8 @@ jobs:
                   fullpath = Path(os.path.join("Data Files", filepath))
                   print(f"Resetting timestamp for {fullpath} to {timestamp}")
                   setTimeStamp(fullpath, timestamp)
-          timestampOverrides = openConfigFile("timestampOverrides.yaml")
           if timestampOverrides:
+              timestampOverrides = openConfigFile("timestampOverrides.yaml")
               resetTimestamps(timestampOverrides)
         shell: python
       - name: Build Project
