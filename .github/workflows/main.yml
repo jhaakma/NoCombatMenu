@@ -28,12 +28,15 @@ jobs:
           import os
           from pathlib import Path
           def openConfigFile(configPath):
-              with open(configPath, 'w+') as stream:
-                  try:
-                      config = yaml.safe_load(stream)
-                  except:
-                      return None
-                  return config
+              try:
+                  with open(configPath, 'r') as stream:
+                      try:
+                          config = yaml.safe_load(stream)
+                      except:
+                          return None
+                      return config
+              except:
+                  print("No timestamps override found, skipping")
           def setTimeStamp(filepath, timestamp):
               os.utime(filepath, (timestamp, timestamp))
           def resetTimestamps(overrides):
@@ -47,8 +50,8 @@ jobs:
                   fullpath = Path(os.path.join("Data Files", filepath))
                   print(f"Resetting timestamp for {fullpath} to {timestamp}")
                   setTimeStamp(fullpath, timestamp)
+          timestampOverrides = openConfigFile("timestampOverrides.yaml")
           if timestampOverrides:
-              timestampOverrides = openConfigFile("timestampOverrides.yaml")
               resetTimestamps(timestampOverrides)
         shell: python
       - name: Build Project
