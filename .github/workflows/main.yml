@@ -28,7 +28,7 @@ jobs:
           import os
           from pathlib import Path
           def openConfigFile(configPath):
-              with open(configPath, 'r') as stream:
+              with open(configPath, 'w+') as stream:
                   try:
                       config = yaml.safe_load(stream)
                   except:
